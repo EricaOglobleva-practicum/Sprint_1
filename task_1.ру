@@ -1,0 +1,29 @@
+time = '1h 45m,360s,25m,30m 120s,2h 60s'
+time_lst = time.split(',')
+summary_minutes = 0 # Здесь ИИ мне подсказал, что нужно писать 0, а не (), так как переменная будет числом
+
+for new_time in time_lst:
+    if 'h' in new_time:
+        no_hours = new_time.replace('h', ' ')
+        hours_val = no_hours.split()[0]
+        summary_minutes += int(hours_val) * 60 # Здесь ИИ подсказал, что нужнно делать рассчет внутри цикла, а не после него
+    if 'm' in new_time:
+            no_minutes = new_time.replace('m', '|') # ИИ объяснил, что если просто убрать m, суммировать не выйдет, так как система уберет секунды и споткнется об слово 1h, поэтому нужен разделитель
+            before_m = no_minutes.split('|')[0]
+            minutes_val = before_m.split()[-1] # Тут подсказал, что минуты идут после часов, то есть можно идти по обратному индексу так как знаем что нужная цифра в конце списка
+            summary_minutes += int(minutes_val)       
+    if 's' in new_time: 
+                no_seconds = new_time.replace('s', '|')
+                before_s = no_seconds.split('|')[0]
+                seconds_val = before_s.split()[-1]
+                summary_minutes += int(seconds_val) / 60   
+          
+print(summary_minutes)  
+
+
+
+    
+
+
+
+
